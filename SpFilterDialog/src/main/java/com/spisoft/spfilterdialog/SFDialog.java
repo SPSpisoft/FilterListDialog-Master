@@ -36,6 +36,7 @@ public class SFDialog extends RelativeLayout {
     private SpinKitView vSpinKitView;
     private Context context;
     private View vFooter;
+    private String mTextFilter = "";
 
     public enum SFD_Mode {
         CheckList(0),
@@ -122,8 +123,17 @@ public class SFDialog extends RelativeLayout {
                     if (mCompleteListener != null)
                         mCompleteListener.onEvent();
                 } else {
+                    vFilterSetTxt.setText(mTextFilter);
                     SetListToMain(context);
                 }
+            }
+        });
+
+        vFooter.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mCompleteListener != null)
+                    mCompleteListener.onEvent();
             }
         });
 
@@ -165,7 +175,7 @@ public class SFDialog extends RelativeLayout {
             @SuppressLint("Recycle") final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SFDialog, 0, 0);
 
             vSpinKitView.setColor(typedArray.getColor(R.styleable.SFDialog_KitColor, Color.GRAY));
-            String mTextFilter = typedArray.getString(R.styleable.SFDialog_TextFilter);
+            mTextFilter = typedArray.getString(R.styleable.SFDialog_TextFilter);
             if (mTextFilter != null) vFilterSetTxt.setText(mTextFilter);
             String mTextFilterClear = typedArray.getString(R.styleable.SFDialog_TextFilterClear);
             if (mTextFilterClear != null) vFilterClearTxt.setText(mTextFilterClear);
@@ -182,6 +192,7 @@ public class SFDialog extends RelativeLayout {
         mOptionAdapter = new OptionAdapter(context);
         vListFilter.setAdapter(mOptionAdapter);
         mOptionAdapter.updateList(mFilterItem.Items, mFilterItem.getMode(), position);
+        vFilterSetTxt.setText(mFilterItem.getTitle());
 
         mOptionAdapter.SetOnItemClickListener(new OptionAdapter.OnItemClickListener() {
             @Override
