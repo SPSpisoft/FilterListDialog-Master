@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/itemFilterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:textAlignment="textStart"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/itemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rangSlider"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:singleLine="true"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp" />
+
+    <com.jaygoo.widget.RangeSeekBar
+        android:id="@+id/rangSlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemFilterTitle"
+        android:layout_marginTop="10dp"
+        android:padding="20dp"
+        app:rsb_gravity="top"
+        app:rsb_mode="range"
+        app:rsb_progress_color="@color/colorAccent"
+        app:rsb_step_auto_bonding="true"
+        app:rsb_step_color="@color/colorAccent"
+        app:rsb_step_height="10dp"
+        app:rsb_step_width="5dp"
+        app:rsb_steps="4"
+        app:rsb_thumb_drawable="@drawable/thumb_green_alpha"
+        app:rsb_tick_mark_gravity="center"
+        app:rsb_tick_mark_layout_gravity="bottom"
+        app:rsb_tick_mark_mode="number"
+        app:rsb_tick_mark_text_margin="20dp" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/rangSlider"
+        android:background="@android:color/darker_gray" />
+
+</RelativeLayout>

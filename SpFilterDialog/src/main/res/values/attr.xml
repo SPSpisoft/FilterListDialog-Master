@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SFDialog">
+
+        <attr name="TextFilter" format="string"/>
+        <attr name="TextFilterClear" format="string"/>
+        <attr name="KitColor" format="color" />
+        <attr name="FooterColor" format="color" />
+        <attr name="FooterTextColor" format="color" />
+
+    </declare-styleable>
+</resources>

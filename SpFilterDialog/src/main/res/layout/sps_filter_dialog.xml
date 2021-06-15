@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/filterDialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/filterHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp">
+
+        <LinearLayout
+            android:id="@+id/bFilterSet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/filterSetIcon"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/ic_action_check" />
+
+            <TextView
+                android:id="@+id/filterSet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:singleLine="true"
+                android:text="@string/filter" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bFilterClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/filterCancelIcon"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/ic_action_close" />
+
+            <TextView
+                android:id="@+id/filterCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:singleLine="true"
+                android:text="@string/filterCancel" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/bFilterClear"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listFilter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/filterFooter"
+        android:layout_below="@+id/filterHead" />
+
+    <RelativeLayout
+        android:id="@+id/filterFooter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:background="@android:color/darker_gray"
+            android:layout_height="50dp">
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Wave"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/cardview_dark_background" />
+
+            <TextView
+                android:id="@+id/filterProductCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/filter" />
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_action_down" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

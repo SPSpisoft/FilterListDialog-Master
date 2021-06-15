@@ -1,0 +1,3 @@
+include ':SpFilterDialog'
+include ':app'
+rootProject.name = "FilterListDialog-Master"
