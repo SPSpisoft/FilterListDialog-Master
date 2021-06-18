@@ -2,6 +2,7 @@ package com.spisoft.spfilterdialog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,9 +92,14 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         SFDialog.FilterItem tItem = mList.get(position);
         holder.textTitle.setText(tItem.getTitle());
 
+        if(tItem.Selected())
+            holder.textTitle.setTypeface(holder.textTitle.getTypeface(), Typeface.BOLD);
+        else
+            holder.textTitle.setTypeface(holder.textTitle.getTypeface(), Typeface.NORMAL);
+
         switch (tItem.getMode()) {
             case Switch:
-                holder.switchCheck.setChecked(tItem.getSel() != null ? tItem.getSel() : false);
+                holder.switchCheck.setChecked(tItem.Selected() != null ? tItem.Selected() : false);
                 holder.switchCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

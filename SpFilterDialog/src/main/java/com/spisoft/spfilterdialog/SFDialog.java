@@ -346,7 +346,7 @@ public class SFDialog extends RelativeLayout {
             Title = title;
         }
 
-        public Boolean getSel() {
+        public Boolean Selected() {
             return Sel;
         }
 
