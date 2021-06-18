@@ -129,6 +129,26 @@ public class SFDialog extends RelativeLayout {
             }
         });
 
+        vFilterSet.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (mCompleteListener != null)
+                    mCompleteListener.onEvent();
+                return true;
+            }
+        });
+
+        vFooter.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mCompleteListener != null)
+                    mCompleteListener.onEvent();
+
+                vFilterSetTxt.setText(mTextFilter);
+                SetListToMain(context);
+            }
+        });
+
         vFooter.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,7 +162,7 @@ public class SFDialog extends RelativeLayout {
             public void onClick(View view) {
                 if (_LastPosition < 0) {
                     for (FilterItem filterItem : myFilterItems) {
-                        switch (filterItem.getMode()){
+                        switch (filterItem.getMode()) {
                             case Switch:
                                 filterItem.setSel(false);
                                 break;
@@ -352,6 +372,12 @@ public class SFDialog extends RelativeLayout {
         private String Id;
         private Object Value;
         private Boolean Sel;
+
+        public FilterItemOption(String id, Object value, boolean sel) {
+            this.Id = id;
+            this.Value = value;
+            this.Sel = sel;
+        }
 
         public String getId() {
             return Id;
