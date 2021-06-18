@@ -120,6 +120,14 @@ public class SFDialog extends RelativeLayout {
             @Override
             public void onClick(View view) {
                 if (_LastPosition < 0) {
+//                    _LastPosition = -1;
+//                    mFilterAdapter = new FilterAdapter(context);
+//                    vListFilter.setAdapter(mFilterAdapter);
+//                    mFilterAdapter.updateList(myFilterItems, mUpdateTaskListener);
+
+                    if (mUpdateTaskListener != null)
+                        mUpdateTaskListener.onEvent(myFilterItems);
+
                     if (mCompleteListener != null)
                         mCompleteListener.onEvent();
                 } else {
@@ -372,6 +380,10 @@ public class SFDialog extends RelativeLayout {
         private String Id;
         private Object Value;
         private Boolean Sel;
+
+        public FilterItemOption(){
+
+        }
 
         public FilterItemOption(String id, Object value, boolean sel) {
             this.Id = id;
