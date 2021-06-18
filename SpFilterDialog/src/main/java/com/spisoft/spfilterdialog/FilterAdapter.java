@@ -185,6 +185,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                             StringBuilder stringBuilder = new StringBuilder();
                             for (SFDialog.FilterItemOption filterItemOption : tItem.getItems()) {
                                 if (filterItemOption.isSel()) {
+                                    tItem.setSel(true);
                                     if (stringBuilder.length() != 0) stringBuilder.append(", ");
                                     stringBuilder.append(filterItemOption.getValue());
                                 }
@@ -229,11 +230,13 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         }
         if (minProgress != null) {
+            tItem.setSel(true);
 //            if(holder.vRangeSlider.getMinProgress() != maxProgress || holder.vRangeSlider.getMaxProgress() != maxProgress)
 //                Toast.makeText(mContext, "تعییر ", Toast.LENGTH_SHORT).show();
             holder.vRangeSlider.setProgress(minProgress, maxProgress);
             holder.textDescription.setText(!minProgress.equals(maxProgress) ? (minProgress + ToText + maxProgress) : "" + minProgress);
-        }
+        }else
+            tItem.setSel(false);
 
         if (updateTaskListener != null)
             updateTaskListener.onEvent(mList);
