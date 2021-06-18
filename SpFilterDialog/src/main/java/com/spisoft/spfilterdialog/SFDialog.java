@@ -146,20 +146,23 @@ public class SFDialog extends RelativeLayout {
             }
         });
 
+//        vFooter.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (mCompleteListener != null)
+//                    mCompleteListener.onEvent();
+//
+//                vFilterSetTxt.setText(mTextFilter);
+//                SetListToMain(context);
+//            }
+//        });
+
         vFooter.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mCompleteListener != null)
-                    mCompleteListener.onEvent();
+                if (mUpdateTaskListener != null)
+                    mUpdateTaskListener.onEvent(myFilterItems);
 
-                vFilterSetTxt.setText(mTextFilter);
-                SetListToMain(context);
-            }
-        });
-
-        vFooter.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 if (mCompleteListener != null)
                     mCompleteListener.onEvent();
             }
