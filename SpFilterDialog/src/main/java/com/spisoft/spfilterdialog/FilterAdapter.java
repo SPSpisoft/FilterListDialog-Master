@@ -94,18 +94,18 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         SFDialog.FilterItem tItem = mList.get(position);
         holder.textTitle.setText(tItem.getTitle());
 
-        if (tItem.Selected() != null && tItem.Selected())
+        if (tItem.isSelected() != null && tItem.isSelected())
             holder.textTitle.setTypeface(holder.textTitle.getTypeface(), Typeface.BOLD);
         else
             holder.textTitle.setTypeface(holder.textTitle.getTypeface(), Typeface.NORMAL);
 
         switch (tItem.getMode()) {
             case Switch:
-                holder.switchCheck.setChecked(tItem.Selected() != null ? tItem.Selected() : false);
+                holder.switchCheck.setChecked(tItem.isSelected() != null ? tItem.isSelected() : false);
                 holder.switchCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        tItem.setSel(b);
+                        tItem.setSelect(b);
                         if (updateTaskListener != null)
                             updateTaskListener.onEvent(mList);
                     }
@@ -196,7 +196,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                             StringBuilder stringBuilder = new StringBuilder();
                             for (SFDialog.FilterItemOption filterItemOption : tItem.getItems()) {
                                 if (filterItemOption.isSel()) {
-                                    tItem.setSel(true);
+                                    tItem.setSelect(true);
                                     if (stringBuilder.length() != 0) stringBuilder.append(", ");
                                     stringBuilder.append(filterItemOption.getValue());
                                 }
@@ -241,13 +241,13 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         }
         if (minProgress != null) {
-            tItem.setSel(true);
+            tItem.setSelect(true);
 //            if(holder.vRangeSlider.getMinProgress() != maxProgress || holder.vRangeSlider.getMaxProgress() != maxProgress)
 //                Toast.makeText(mContext, "تعییر ", Toast.LENGTH_SHORT).show();
             holder.vRangeSlider.setProgress(minProgress, maxProgress);
             holder.textDescription.setText(!minProgress.equals(maxProgress) ? (minProgress + ToText + maxProgress) : "" + minProgress);
         } else
-            tItem.setSel(false);
+            tItem.setSelect(false);
 
         if (updateTaskListener != null)
             updateTaskListener.onEvent(mList);

@@ -28,7 +28,7 @@
                 android:layout_width="30dp"
                 android:layout_height="20dp"
                 android:layout_marginBottom="2dp"
-                android:src="@drawable/ic_action_back" />
+                android:src="@drawable/ic_action_right" />
 
             <TextView
                 android:id="@+id/filterSet"

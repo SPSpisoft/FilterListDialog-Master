@@ -303,6 +303,8 @@ public class SFDialog extends RelativeLayout  {
 
         if (mUpdateTaskListener != null)
             mUpdateTaskListener.onEvent(myFilterItems);
+
+        mFilterAdapter.notifyDataSetChanged();
     }
 
     public SFDialog SetItems(List<FilterItem> filterItems) {
