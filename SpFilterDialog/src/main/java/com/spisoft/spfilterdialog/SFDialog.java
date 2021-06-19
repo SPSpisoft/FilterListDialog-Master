@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SFDialog extends RelativeLayout {
+public class SFDialog extends RelativeLayout  {
     private View rootView;
     private RecyclerView vListFilter;
     private FilterAdapter mFilterAdapter;
@@ -37,6 +37,8 @@ public class SFDialog extends RelativeLayout {
     private Context context;
     private View vFooter;
     private String mTextFilter = "";
+    private boolean SetOnChange = false;
+    private boolean AutoRangeSet = true;
 
     public enum SFD_Mode {
         CheckList(0),
@@ -212,7 +214,8 @@ public class SFDialog extends RelativeLayout {
             if (mTextFilterClear != null) vFilterClearTxt.setText(mTextFilterClear);
             vFooter.setBackgroundColor(typedArray.getColor(R.styleable.SFDialog_FooterColor, Color.GRAY));
             vFilterProductCount.setTextColor(typedArray.getColor(R.styleable.SFDialog_FooterTextColor, Color.WHITE));
-
+            SetOnChange = typedArray.getBoolean(R.styleable.SFDialog_SetOnChange, false);
+            AutoRangeSet = typedArray.getBoolean(R.styleable.SFDialog_AutoRangeSet, true);
             typedArray.recycle();
             invalidate();
         }
@@ -220,7 +223,15 @@ public class SFDialog extends RelativeLayout {
 
     private void SetListToSub(Context context, FilterItem mFilterItem, int position) {
         _LastPosition = position;
-        mOptionAdapter = new OptionAdapter(context);
+        mOptionAdapter = new OptionAdapter(context, new OptionAdapter.OptionListener() {
+            @Override
+            public void callUpdate() {
+                if (SetOnChange)
+                    if (mUpdateTaskListener != null)
+                        mUpdateTaskListener.onEvent(myFilterItems);
+            }
+        });
+
         vListFilter.setAdapter(mOptionAdapter);
         mOptionAdapter.updateList(mFilterItem.Items, mFilterItem.getMode(), position);
         vFilterSetTxt.setText(mFilterItem.getTitle());
@@ -384,7 +395,7 @@ public class SFDialog extends RelativeLayout {
         private Object Value;
         private Boolean Sel;
 
-        public FilterItemOption(){
+        public FilterItemOption() {
 
         }
 
@@ -432,6 +443,7 @@ public class SFDialog extends RelativeLayout {
                 break;
         }
     }
+
 
     public interface OnUpdateTaskListener {
         void onEvent(List<FilterItem> filterItems);

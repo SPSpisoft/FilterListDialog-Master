@@ -18,7 +18,9 @@ import com.jaygoo.widget.RangeSeekBar;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -92,7 +94,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         SFDialog.FilterItem tItem = mList.get(position);
         holder.textTitle.setText(tItem.getTitle());
 
-        if(tItem.Selected())
+        if (tItem.Selected() != null && tItem.Selected())
             holder.textTitle.setTypeface(holder.textTitle.getTypeface(), Typeface.BOLD);
         else
             holder.textTitle.setTypeface(holder.textTitle.getTypeface(), Typeface.NORMAL);
@@ -127,10 +129,13 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 listItems.add(String.valueOf(min));
                 listItems.add(String.valueOf(max));
 
-                Collections.sort(listItemsInt);
+                Set<Integer> hashSet = new LinkedHashSet(listItemsInt);
+                ArrayList<Integer> removedDuplicates = new ArrayList(hashSet);
+
+                Collections.sort(removedDuplicates);
                 Integer LastVal = null;
                 Integer minRange = max - min;
-                for (Integer mVal : listItemsInt) {
+                for (Integer mVal : removedDuplicates) {
                     if (LastVal == null)
                         LastVal = mVal;
                     else {
@@ -241,7 +246,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 //                Toast.makeText(mContext, "تعییر ", Toast.LENGTH_SHORT).show();
             holder.vRangeSlider.setProgress(minProgress, maxProgress);
             holder.textDescription.setText(!minProgress.equals(maxProgress) ? (minProgress + ToText + maxProgress) : "" + minProgress);
-        }else
+        } else
             tItem.setSel(false);
 
         if (updateTaskListener != null)

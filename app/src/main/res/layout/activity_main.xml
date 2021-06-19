@@ -9,6 +9,7 @@
     <com.spisoft.spfilterdialog.SFDialog
         android:id="@+id/sdialg"
         app:TextFilter="فیلترها"
+        app:SetOnChange="true"
         app:TextFilterClear="پاک کردن"
         app:FooterColor="@color/design_default_color_primary_dark"
         app:FooterTextColor="@color/white"

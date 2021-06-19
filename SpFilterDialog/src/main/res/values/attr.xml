@@ -8,6 +8,8 @@
         <attr name="KitColor" format="color" />
         <attr name="FooterColor" format="color" />
         <attr name="FooterTextColor" format="color" />
+        <attr name="SetOnChange" format="boolean" />
+        <attr name="AutoRangeSet" format="boolean" />
 
     </declare-styleable>
 </resources>

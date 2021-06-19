@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,9 +26,11 @@ public class OptionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private OnItemClickListener mItemClickListener;
     private int mParent;
     private SFDialog.SFD_Mode mMode;
+    private final OptionListener mListener;
 
-    public OptionAdapter(Context context) {
+    public OptionAdapter(Context context, OptionListener listener) {
         this.mContext = context;
+        this.mListener = listener;
     }
 
 //    public void updateList(List<SFDialog.FilterItemOption> list) {
@@ -57,6 +60,26 @@ public class OptionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             vIcon = (ImageView) view.findViewById(R.id.iconOption);
             vCheckBox = view.findViewById(R.id.checkbox);
             vRadio = view.findViewById(R.id.radio);
+
+            if(vCheckBox != null) {
+                vCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (mListener != null)
+                            mListener.callUpdate();
+                    }
+                });
+            }
+
+            if(vRadio != null) {
+                vRadio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (mListener != null)
+                            mListener.callUpdate();
+                    }
+                });
+            }
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -137,5 +160,9 @@ public class OptionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     // for both short and long click
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
+    }
+
+    public interface OptionListener {
+        void callUpdate();
     }
 }
