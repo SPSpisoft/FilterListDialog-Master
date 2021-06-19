@@ -177,9 +177,10 @@ public class SFDialog extends RelativeLayout  {
                     for (FilterItem filterItem : myFilterItems) {
                         switch (filterItem.getMode()) {
                             case Switch:
-                                filterItem.setSel(false);
+                                filterItem.setSelect(false);
                                 break;
                             case SeekBar:
+                                filterItem.setSelect(false);
                                 break;
                             default:
                                 for (FilterItemOption filterItemOption : filterItem.getItems()) {
@@ -251,6 +252,7 @@ public class SFDialog extends RelativeLayout  {
 
     private void OptionClick(int parent, int position) {
         FilterItem mItem = myFilterItems.get(parent);
+        mItem.setSelect(true);
         switch (mItem.getMode()) {
             case CheckList:
                 mItem.getItems().get(position).setSel(!mItem.getItems().get(position).isSel());
@@ -266,7 +268,7 @@ public class SFDialog extends RelativeLayout  {
                 mOptionAdapter.notifyDataSetChanged();
                 break;
         }
-
+        mFilterAdapter.notifyDataSetChanged();
     }
 
     private void SetListToMain(Context context) {
@@ -357,11 +359,11 @@ public class SFDialog extends RelativeLayout  {
             Title = title;
         }
 
-        public Boolean Selected() {
+        public Boolean isSelected() {
             return Sel;
         }
 
-        public void setSel(Boolean sel) {
+        public void setSelect(Boolean sel) {
             Sel = sel;
         }
 
