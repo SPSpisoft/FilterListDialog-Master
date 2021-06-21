@@ -106,6 +106,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                         tItem.setSelect(b);
+                        notifyDataSetChanged();
                         if (updateTaskListener != null)
                             updateTaskListener.onEvent(mList);
                     }
@@ -193,6 +194,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 if (tItem.getItems() != null) {
                     switch (tItem.getType()) {
                         case String:
+                            tItem.setSelect(false);
                             StringBuilder stringBuilder = new StringBuilder();
                             for (SFDialog.FilterItemOption filterItemOption : tItem.getItems()) {
                                 if (filterItemOption.isSel()) {
@@ -248,6 +250,8 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.textDescription.setText(!minProgress.equals(maxProgress) ? (minProgress + ToText + maxProgress) : "" + minProgress);
         } else
             tItem.setSelect(false);
+
+        notifyDataSetChanged();
 
         if (updateTaskListener != null)
             updateTaskListener.onEvent(mList);

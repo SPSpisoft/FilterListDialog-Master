@@ -252,10 +252,16 @@ public class SFDialog extends RelativeLayout  {
 
     private void OptionClick(int parent, int position) {
         FilterItem mItem = myFilterItems.get(parent);
-        mItem.setSelect(true);
         switch (mItem.getMode()) {
             case CheckList:
                 mItem.getItems().get(position).setSel(!mItem.getItems().get(position).isSel());
+                mItem.setSelect(false);
+                int ii = 0;
+                while (!mItem.isSelected() && ii < mItem.getItems().size()) {
+                    if (mItem.getItems().get(ii).isSel())
+                        mItem.setSelect(true);
+                    ii++;
+                }
                 mOptionAdapter.notifyDataSetChanged();
                 break;
             case OptionList:
