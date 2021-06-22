@@ -94,11 +94,6 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         SFDialog.FilterItem tItem = mList.get(position);
         holder.textTitle.setText(tItem.getTitle());
 
-        if (tItem.isSelected() != null && tItem.isSelected())
-            holder.textTitle.setTypeface(holder.textTitle.getTypeface(), Typeface.BOLD);
-        else
-            holder.textTitle.setTypeface(holder.textTitle.getTypeface(), Typeface.NORMAL);
-
         switch (tItem.getMode()) {
             case Switch:
                 holder.switchCheck.setChecked(tItem.isSelected() != null ? tItem.isSelected() : false);
@@ -228,6 +223,11 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 break;
         }
 
+//        if (tItem.isSelected() != null && tItem.isSelected())
+//            holder.textTitle.setTypeface(holder.textTitle.getTypeface(), Typeface.BOLD);
+//        else
+//            holder.textTitle.setTypeface(holder.textTitle.getTypeface(), Typeface.NORMAL);
+
     }
 
     private void setProgressValue(CellViewHolder holder, SFDialog.FilterItem tItem) {
@@ -251,7 +251,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         } else
             tItem.setSelect(false);
 
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
 
         if (updateTaskListener != null)
             updateTaskListener.onEvent(mList);
