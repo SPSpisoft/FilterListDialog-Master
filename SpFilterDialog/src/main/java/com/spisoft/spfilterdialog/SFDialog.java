@@ -329,6 +329,7 @@ public class SFDialog extends RelativeLayout  {
         private SFD_Mode Mode; //todo: 0:list 1:bool 2:seekBar
         private SFD_Type Type; //todo: 0:string 1:bool 2:numeric
         private List<FilterItemOption> Items;
+        private Boolean PlusOption;
 
         public FilterItem() {
         }
@@ -397,6 +398,14 @@ public class SFDialog extends RelativeLayout  {
 
         public void setItems(List<FilterItemOption> items) {
             Items = items;
+        }
+
+        public Boolean isPlusOption() {
+            return PlusOption;
+        }
+
+        public void setPlusOption(Boolean plusOption) {
+            PlusOption = plusOption;
         }
     }
 

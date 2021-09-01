@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         mItem3.setMode(SFDialog.SFD_Mode.SeekBar);
         mItem3.setId("Item_3");
         mItem3.setTitle("Item 3");
+        mItem3.setPlusOption(false);
         mItem3.setType(SFDialog.SFD_Type.Numeric);
 
         List<SFDialog.FilterItemOption> mValues = new ArrayList<>();

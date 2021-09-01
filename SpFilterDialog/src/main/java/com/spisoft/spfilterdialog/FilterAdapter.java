@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,6 +48,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private TextView textTitle, textDescription;
         private SwitchMaterial switchCheck;
         private RangeSeekBar vRangeSlider;
+        private ImageView vAutoRange;
 
         public CellViewHolder(View view) {
             super(view);
@@ -54,6 +57,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             textDescription = (TextView) view.findViewById(R.id.itemDescription);
             switchCheck = (SwitchMaterial) view.findViewById(R.id.switchCheck);
             vRangeSlider = view.findViewById(R.id.rangSlider);
+            vAutoRange = view.findViewById(R.id.autoRange);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -149,16 +153,31 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 setProgressValue(holder, tItem);
 
+                holder.vAutoRange.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(!tItem.isPlusOption()) {
+                            holder.vAutoRange.setImageResource(R.drawable.ic_baseline_autofps_select_24_on);
+                            tItem.setPlusOption(true);
+                            notifyDataSetChanged();
+                            Toast.makeText(mContext, "Auto range set on ", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
                 holder.vRangeSlider.setOnRangeChangedListener(new OnRangeChangedListener() {
                     @Override
                     public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
                         holder.textDescription.setText(leftValue != rightValue ? (int) leftValue + ToText + (int) rightValue : "" + (int) leftValue);
-                        for (SFDialog.FilterItemOption filterItemOption : tItem.getItems()) {
-                            if (filterItemOption.getValue() != null && (int) filterItemOption.getValue() >= leftValue && (int) filterItemOption.getValue() <= rightValue)
-                                filterItemOption.setSel(true);
-                            else
-                                filterItemOption.setSel(false);
-                        }
+
+                        //TODO: Auto seek
+                        if(tItem.isPlusOption())
+                            for (SFDialog.FilterItemOption filterItemOption : tItem.getItems()) {
+                                if (filterItemOption.getValue() != null && (int) filterItemOption.getValue() >= leftValue && (int) filterItemOption.getValue() <= rightValue)
+                                    filterItemOption.setSel(true);
+                                else
+                                    filterItemOption.setSel(false);
+                            }
 
                         if (isFromUser) {
                             new Handler().postDelayed(new Runnable() {
