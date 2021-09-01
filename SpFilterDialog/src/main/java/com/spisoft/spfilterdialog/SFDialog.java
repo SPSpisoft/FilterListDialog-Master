@@ -332,6 +332,7 @@ public class SFDialog extends RelativeLayout  {
         private Boolean PlusOption;
 
         public FilterItem() {
+            setPlusOption(false);
         }
 
         public FilterItem(String id, String field, String title, SFD_Mode mode, Boolean sel, SFD_Type type, List<FilterItemOption> items) {
