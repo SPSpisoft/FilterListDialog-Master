@@ -332,7 +332,7 @@ public class SFDialog extends RelativeLayout  {
         private Boolean PlusOption;
 
         public FilterItem() {
-            setPlusOption(false);
+            this.PlusOption = false;
         }
 
         public FilterItem(String id, String field, String title, SFD_Mode mode, Boolean sel, SFD_Type type, List<FilterItemOption> items) {
@@ -343,6 +343,7 @@ public class SFDialog extends RelativeLayout  {
             this.Mode = mode;
             this.Type = type;
             this.Items = items;
+            this.PlusOption = false;
         }
 
         public String getId() {
