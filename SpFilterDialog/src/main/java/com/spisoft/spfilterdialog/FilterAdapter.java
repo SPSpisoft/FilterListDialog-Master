@@ -156,7 +156,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 //TODO : SET AUTO ON START ON !!!!!!!!!!!!
                 holder.vAutoRange.setImageResource(R.drawable.ic_baseline_autofps_select_24_on);
                 tItem.setPlusOption(true);
-                notifyDataSetChanged();
+//                notifyDataSetChanged();
 
                 holder.vAutoRange.setOnClickListener(new View.OnClickListener() {
                     @Override
